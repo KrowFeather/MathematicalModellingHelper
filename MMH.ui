@@ -164,7 +164,7 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="tab_2">
          <attribute name="title">
@@ -174,7 +174,7 @@
           <item>
            <widget class="QTabWidget" name="tabWidget_3">
             <property name="currentIndex">
-             <number>1</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="tab_6">
              <attribute name="title">
@@ -196,8 +196,8 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>445</width>
-                   <height>437</height>
+                   <width>152</width>
+                   <height>388</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -330,6 +330,32 @@
               </item>
              </layout>
             </widget>
+            <widget class="QWidget" name="tab_8">
+             <attribute name="title">
+              <string>标准化</string>
+             </attribute>
+             <layout class="QHBoxLayout" name="horizontalLayout_13">
+              <item>
+               <widget class="QWidget" name="widget_13" native="true">
+                <layout class="QHBoxLayout" name="horizontalLayout_11">
+                 <item>
+                  <widget class="QPushButton" name="btnStartNorm">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>100</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>开始</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
            </widget>
           </item>
           <item>
@@ -388,19 +414,26 @@
                <widget class="QWidget" name="widget_8" native="true">
                 <layout class="QVBoxLayout" name="verticalLayout_4">
                  <item>
-                  <widget class="QPushButton" name="pushButton">
+                  <widget class="QLabel" name="label_7">
                    <property name="text">
-                    <string>PushButton</string>
+                    <string>在使用前请保证已正向化和标准化</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QTableWidget" name="tableWidget_2"/>
+                  <widget class="QPushButton" name="btnTopsisWork">
+                   <property name="text">
+                    <string>开始</string>
+                   </property>
+                  </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_2">
+                  <widget class="QTableWidget" name="topsisMatrix"/>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btnTopsisOutput">
                    <property name="text">
-                    <string>PushButton</string>
+                    <string>导出</string>
                    </property>
                   </widget>
                  </item>

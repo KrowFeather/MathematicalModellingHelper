@@ -4,6 +4,8 @@ import sys
 from PySide6.QtWidgets import QWidget, QApplication, QFileDialog, QTableWidgetItem
 from qt_material import apply_stylesheet
 
+from Functions.EvaluateModels.Topsis import topsis
+from Functions.Preworks.Normalization import normalization
 from Functions.utils.OutputXlsx import outputXlsx
 from MMH import Ui_Form
 import pandas as pd
@@ -13,6 +15,7 @@ from Functions.Preworks.PositiveTransformation import *
 class Frame(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
+        self.topsisMat = None
         self.fileName = None
         self.setupUi(self)
         self.setWindowTitle("Mathematical Modelling Helper a1.0.0")
@@ -28,7 +31,10 @@ class Frame(QWidget, Ui_Form):
         self.btnMinMetric.clicked.connect(lambda: self.calcMin())
         self.btnBS.clicked.connect(lambda: self.calcBS())
         self.btnInterval.clicked.connect(lambda: self.calcInterval())
-        self.btn_output.clicked.connect(lambda: self.outputXlsx())
+        self.btn_output.clicked.connect(lambda: self.outputXlsx(self.mat))
+        self.btnStartNorm.clicked.connect(lambda: self.startNormalization())
+        self.btnTopsisWork.clicked.connect(lambda: self.startTopsis())
+        self.btnTopsisOutput.clicked.connect(lambda: self.outputXlsx(self.topsisMat))
 
     def open_file_dialog(self):
         file_name, _ = QFileDialog.getOpenFileName(
@@ -49,7 +55,7 @@ class Frame(QWidget, Ui_Form):
         else:
             self.df = pd.read_csv(filename)
         self.mat = self.df.to_numpy()
-        self.sizelabel.setText(f"{self.mat.shape}")
+        self.sizelabel.setText(f"{self.mat.shape[0], self.mat.shape[1] - 1}")
         self.showTable()
 
     def showTable(self):
@@ -92,14 +98,25 @@ class Frame(QWidget, Ui_Form):
         self.showTable()
         pass
 
-    def outputXlsx(self):
+    def outputXlsx(self, mat):
         file_path, _ = QFileDialog.getSaveFileName(
             self,
             "Save File",
             f"{self.fileName}",
             "Excel Files (*.xlsx)"
         )
-        outputXlsx(file_path, self.mat)
+        outputXlsx(file_path, mat)
+
+    def startNormalization(self):
+        normalization(self.mat)
+        self.showTable()
+
+    def startTopsis(self):
+        self.topsisMat = topsis(self.mat)
+        self.topsisMatrix.setRowCount(min(len(self.topsisMat), 100))
+        self.topsisMatrix.setColumnCount(1)
+        for i in range(len(self.topsisMat)):
+            self.topsisMatrix.setItem(i, 0, QTableWidgetItem(str(self.topsisMat[i])))
 
 
 def run():

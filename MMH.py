@@ -157,7 +157,7 @@ class Ui_Form(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 445, 437))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 152, 388))
         self.verticalLayout_10 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
         self.widget_9 = QWidget(self.scrollAreaWidgetContents)
@@ -260,6 +260,24 @@ class Ui_Form(object):
         self.verticalLayout_9.addWidget(self.scrollArea)
 
         self.tabWidget_3.addTab(self.tab_7, "")
+        self.tab_8 = QWidget()
+        self.tab_8.setObjectName(u"tab_8")
+        self.horizontalLayout_13 = QHBoxLayout(self.tab_8)
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
+        self.widget_13 = QWidget(self.tab_8)
+        self.widget_13.setObjectName(u"widget_13")
+        self.horizontalLayout_11 = QHBoxLayout(self.widget_13)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.btnStartNorm = QPushButton(self.widget_13)
+        self.btnStartNorm.setObjectName(u"btnStartNorm")
+        self.btnStartNorm.setMinimumSize(QSize(0, 100))
+
+        self.horizontalLayout_11.addWidget(self.btnStartNorm)
+
+
+        self.horizontalLayout_13.addWidget(self.widget_13)
+
+        self.tabWidget_3.addTab(self.tab_8, "")
 
         self.horizontalLayout_9.addWidget(self.tabWidget_3)
 
@@ -292,20 +310,25 @@ class Ui_Form(object):
         self.widget_8.setObjectName(u"widget_8")
         self.verticalLayout_4 = QVBoxLayout(self.widget_8)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.pushButton = QPushButton(self.widget_8)
-        self.pushButton.setObjectName(u"pushButton")
+        self.label_7 = QLabel(self.widget_8)
+        self.label_7.setObjectName(u"label_7")
 
-        self.verticalLayout_4.addWidget(self.pushButton)
+        self.verticalLayout_4.addWidget(self.label_7)
 
-        self.tableWidget_2 = QTableWidget(self.widget_8)
-        self.tableWidget_2.setObjectName(u"tableWidget_2")
+        self.btnTopsisWork = QPushButton(self.widget_8)
+        self.btnTopsisWork.setObjectName(u"btnTopsisWork")
 
-        self.verticalLayout_4.addWidget(self.tableWidget_2)
+        self.verticalLayout_4.addWidget(self.btnTopsisWork)
 
-        self.pushButton_2 = QPushButton(self.widget_8)
-        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.topsisMatrix = QTableWidget(self.widget_8)
+        self.topsisMatrix.setObjectName(u"topsisMatrix")
 
-        self.verticalLayout_4.addWidget(self.pushButton_2)
+        self.verticalLayout_4.addWidget(self.topsisMatrix)
+
+        self.btnTopsisOutput = QPushButton(self.widget_8)
+        self.btnTopsisOutput.setObjectName(u"btnTopsisOutput")
+
+        self.verticalLayout_4.addWidget(self.btnTopsisOutput)
 
 
         self.horizontalLayout_8.addWidget(self.widget_8)
@@ -327,8 +350,8 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.tabWidget.setCurrentIndex(0)
-        self.tabWidget_3.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget_3.setCurrentIndex(2)
         self.tabWidget_2.setCurrentIndex(1)
 
 
@@ -363,12 +386,15 @@ class Ui_Form(object):
         self.bestScoreCols.setPlaceholderText(QCoreApplication.translate("Form", u"\u5217\u53f7\uff0c\u4ee5\u201c,\u201d\u5206\u9694", None))
         self.btnBS.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb", None))
         self.tabWidget_3.setTabText(self.tabWidget_3.indexOf(self.tab_7), QCoreApplication.translate("Form", u"\u6b63\u5411\u5316", None))
+        self.btnStartNorm.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb", None))
+        self.tabWidget_3.setTabText(self.tabWidget_3.indexOf(self.tab_8), QCoreApplication.translate("Form", u"\u6807\u51c6\u5316", None))
         self.label_4.setText("")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("Form", u"\u9884\u5904\u7406", None))
         self.label_5.setText(QCoreApplication.translate("Form", u"TextLabel", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_3), QCoreApplication.translate("Form", u"AHP", None))
-        self.pushButton.setText(QCoreApplication.translate("Form", u"PushButton", None))
-        self.pushButton_2.setText(QCoreApplication.translate("Form", u"PushButton", None))
+        self.label_7.setText(QCoreApplication.translate("Form", u"\u5728\u4f7f\u7528\u524d\u8bf7\u4fdd\u8bc1\u5df2\u6b63\u5411\u5316\u548c\u6807\u51c6\u5316", None))
+        self.btnTopsisWork.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb", None))
+        self.btnTopsisOutput.setText(QCoreApplication.translate("Form", u"\u5bfc\u51fa", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_4), QCoreApplication.translate("Form", u"Topsis", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_5), QCoreApplication.translate("Form", u"\u71b5\u6743", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("Form", u"\u8bc4\u4ef7\u6a21\u578b", None))
