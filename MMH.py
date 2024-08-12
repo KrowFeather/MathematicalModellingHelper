@@ -295,12 +295,66 @@ class Ui_Form(object):
         self.tabWidget_2.setObjectName(u"tabWidget_2")
         self.tab_3 = QWidget()
         self.tab_3.setObjectName(u"tab_3")
-        self.tableWidget = QTableWidget(self.tab_3)
-        self.tableWidget.setObjectName(u"tableWidget")
-        self.tableWidget.setGeometry(QRect(100, 50, 256, 192))
-        self.label_5 = QLabel(self.tab_3)
+        self.horizontalLayout_17 = QHBoxLayout(self.tab_3)
+        self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
+        self.widget_18 = QWidget(self.tab_3)
+        self.widget_18.setObjectName(u"widget_18")
+        self.verticalLayout_2 = QVBoxLayout(self.widget_18)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.label_5 = QLabel(self.widget_18)
         self.label_5.setObjectName(u"label_5")
-        self.label_5.setGeometry(QRect(30, 20, 54, 16))
+
+        self.verticalLayout_2.addWidget(self.label_5)
+
+        self.ahpMat = QTableWidget(self.widget_18)
+        self.ahpMat.setObjectName(u"ahpMat")
+
+        self.verticalLayout_2.addWidget(self.ahpMat)
+
+        self.pushButton = QPushButton(self.widget_18)
+        self.pushButton.setObjectName(u"pushButton")
+
+        self.verticalLayout_2.addWidget(self.pushButton)
+
+        self.label_13 = QLabel(self.widget_18)
+        self.label_13.setObjectName(u"label_13")
+
+        self.verticalLayout_2.addWidget(self.label_13)
+
+
+        self.horizontalLayout_17.addWidget(self.widget_18)
+
+        self.widget_19 = QWidget(self.tab_3)
+        self.widget_19.setObjectName(u"widget_19")
+        self.verticalLayout_12 = QVBoxLayout(self.widget_19)
+        self.verticalLayout_12.setObjectName(u"verticalLayout_12")
+        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_12.addItem(self.verticalSpacer_3)
+
+        self.label_11 = QLabel(self.widget_19)
+        self.label_11.setObjectName(u"label_11")
+
+        self.verticalLayout_12.addWidget(self.label_11)
+
+        self.comboBox = QComboBox(self.widget_19)
+        self.comboBox.addItem("")
+        self.comboBox.setObjectName(u"comboBox")
+
+        self.verticalLayout_12.addWidget(self.comboBox)
+
+        self.pushButton_2 = QPushButton(self.widget_19)
+        self.pushButton_2.setObjectName(u"pushButton_2")
+
+        self.verticalLayout_12.addWidget(self.pushButton_2)
+
+        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_12.addItem(self.verticalSpacer_4)
+
+
+        self.horizontalLayout_17.addWidget(self.widget_19)
+
         self.tabWidget_2.addTab(self.tab_3, "")
         self.tab_4 = QWidget()
         self.tab_4.setObjectName(u"tab_4")
@@ -426,7 +480,7 @@ class Ui_Form(object):
 
         self.tabWidget.setCurrentIndex(1)
         self.tabWidget_3.setCurrentIndex(2)
-        self.tabWidget_2.setCurrentIndex(1)
+        self.tabWidget_2.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -434,9 +488,9 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
-        self.label_2.setText(QCoreApplication.translate("Form", u"FIlename\uff1a", None))
+        self.label_2.setText(QCoreApplication.translate("Form", u"FIlename:", None))
         self.filenamelabel.setText(QCoreApplication.translate("Form", u"\u672a\u5bfc\u5165", None))
-        self.label.setText(QCoreApplication.translate("Form", u"size\uff1a", None))
+        self.label.setText(QCoreApplication.translate("Form", u"size:", None))
         self.sizelabel.setText("")
         self.btn_getFile.setText(QCoreApplication.translate("Form", u"\u5bfc\u5165", None))
         self.btn_output.setText(QCoreApplication.translate("Form", u"\u5bfc\u51fa", None))
@@ -464,7 +518,13 @@ class Ui_Form(object):
         self.tabWidget_3.setTabText(self.tabWidget_3.indexOf(self.tab_8), QCoreApplication.translate("Form", u"\u6807\u51c6\u5316", None))
         self.label_4.setText("")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("Form", u"\u9884\u5904\u7406", None))
-        self.label_5.setText(QCoreApplication.translate("Form", u"TextLabel", None))
+        self.label_5.setText(QCoreApplication.translate("Form", u"\u6743\u91cd\u77e9\u9635", None))
+        self.pushButton.setText(QCoreApplication.translate("Form", u"Check", None))
+        self.label_13.setText(QCoreApplication.translate("Form", u"TextLabel", None))
+        self.label_11.setText(QCoreApplication.translate("Form", u"Trans to", None))
+        self.comboBox.setItemText(0, QCoreApplication.translate("Form", u"Topsis", None))
+
+        self.pushButton_2.setText(QCoreApplication.translate("Form", u"Trans", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_3), QCoreApplication.translate("Form", u"AHP", None))
         self.label_7.setText(QCoreApplication.translate("Form", u"\u5728\u4f7f\u7528\u524d\u8bf7\u4fdd\u8bc1\u5df2\u6b63\u5411\u5316\u548c\u6807\u51c6\u5316*", None))
         self.label_9.setText(QCoreApplication.translate("Form", u"\u6743\u91cd\u5206\u914d", None))

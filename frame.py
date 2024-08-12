@@ -133,7 +133,7 @@ class Frame(QWidget, Ui_Form):
         self.showTable()
 
     def startTopsis(self):
-        self.topsisMat = topsis(self.mat,self.W)
+        self.topsisMat = topsis(self.mat, self.W)
         self.topsisMatrix.setRowCount(min(len(self.topsisMat), 100))
         self.topsisMatrix.setColumnCount(1)
         for i in range(len(self.topsisMat)):
