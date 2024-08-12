@@ -1,7 +1,7 @@
 import math
 
 
-def topsis(mat):
+def topsis(mat, W):
     Max = [0 for _ in range(mat.shape[1])]
     Min = [math.inf for _ in range(mat.shape[1])]
     for i in range(mat.shape[0]):
@@ -12,7 +12,7 @@ def topsis(mat):
     dis_minus = [0 for _ in range(mat.shape[0])]
     for i in range(mat.shape[0]):
         for j in range(1, mat.shape[1]):
-            dis_plus[i] += (Max[j] - mat[i][j]) ** 2
+            dis_plus[i] += (Max[j] - mat[i][j]) ** 2 * W[j]
         dis_plus[i] **= 0.5
     for i in range(mat.shape[0]):
         for j in range(1, mat.shape[1]):

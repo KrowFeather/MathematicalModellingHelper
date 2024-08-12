@@ -1,9 +1,10 @@
 import os
 import sys
 
-from PySide6.QtWidgets import QWidget, QApplication, QFileDialog, QTableWidgetItem
+from PySide6.QtWidgets import QWidget, QApplication, QFileDialog, QTableWidgetItem, QHeaderView
 from qt_material import apply_stylesheet
 
+from Functions.EvaluateModels.EntropyWeight import entropyWeight
 from Functions.EvaluateModels.Topsis import topsis
 from Functions.Preworks.Normalization import normalization
 from Functions.utils.OutputXlsx import outputXlsx
@@ -23,6 +24,13 @@ class Frame(QWidget, Ui_Form):
         self.showMaximized()
         self.df = pd.DataFrame()
         self.mat = None
+        self.W = None
+        self.EW = None
+
+        self.matrix_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.topsisWeightMat.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.topsisMatrix.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.ewMat.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.bind()
 
     def bind(self):
@@ -35,6 +43,8 @@ class Frame(QWidget, Ui_Form):
         self.btnStartNorm.clicked.connect(lambda: self.startNormalization())
         self.btnTopsisWork.clicked.connect(lambda: self.startTopsis())
         self.btnTopsisOutput.clicked.connect(lambda: self.outputXlsx(self.topsisMat))
+        self.btnEntropyWeight.clicked.connect(lambda: self.startEW())
+        self.btnTransEWBtn.clicked.connect(lambda: self.transWMatrixTo())
 
     def open_file_dialog(self):
         file_name, _ = QFileDialog.getOpenFileName(
@@ -50,13 +60,14 @@ class Frame(QWidget, Ui_Form):
 
     def prework(self, filename):
         (_, extension) = os.path.splitext(filename)
-        if extension == ".xlsx":
-            self.df = pd.read_excel(filename)
-        else:
-            self.df = pd.read_csv(filename)
+        self.df = pd.read_excel(filename)
         self.mat = self.df.to_numpy()
         self.sizelabel.setText(f"{self.mat.shape[0], self.mat.shape[1] - 1}")
+        self.topsisWeightMat.setRowCount(1)
+        self.topsisWeightMat.setColumnCount(self.mat.shape[1] - 1)
+        self.W = [1 for _ in range(self.mat.shape[1])]
         self.showTable()
+        self.showTopsisWeightTable()
 
     def showTable(self):
         begin = self.begin_index.text()
@@ -108,15 +119,42 @@ class Frame(QWidget, Ui_Form):
         outputXlsx(file_path, mat)
 
     def startNormalization(self):
-        normalization(self.mat)
+        mtype = 0
+        flag = True
+        for i in range(self.mat.shape[0]):
+            for j in range(1, self.mat.shape[1]):
+                if self.mat[i][j] < 0:
+                    mtype = 1
+                    flag = False
+                    break
+            if not flag:
+                break
+        normalization(self.mat, mtype)
         self.showTable()
 
     def startTopsis(self):
-        self.topsisMat = topsis(self.mat)
+        self.topsisMat = topsis(self.mat,self.W)
         self.topsisMatrix.setRowCount(min(len(self.topsisMat), 100))
         self.topsisMatrix.setColumnCount(1)
         for i in range(len(self.topsisMat)):
             self.topsisMatrix.setItem(i, 0, QTableWidgetItem(str(self.topsisMat[i])))
+
+    def startEW(self):
+        self.EW = entropyWeight(self.mat)
+        self.ewMat.setRowCount(1)
+        self.ewMat.setColumnCount(min(len(self.EW) - 1, 100))
+        for i in range(len(self.EW)):
+            self.ewMat.setItem(0, i - 1, QTableWidgetItem(str(self.EW[i])))
+
+    def transWMatrixTo(self):
+        selected_text = self.ewToCB.currentText()
+        if selected_text == 'Topsis':
+            self.W = self.EW
+            self.showTopsisWeightTable()
+
+    def showTopsisWeightTable(self):
+        for i in range(1, len(self.W)):
+            self.topsisWeightMat.setItem(0, i - 1, QTableWidgetItem(str(self.W[i])))
 
 
 def run():

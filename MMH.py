@@ -15,10 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QHeaderView,
-    QLabel, QLineEdit, QPushButton, QScrollArea,
-    QSizePolicy, QTabWidget, QTableWidget, QTableWidgetItem,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QHBoxLayout,
+    QHeaderView, QLabel, QLineEdit, QPushButton,
+    QScrollArea, QSizePolicy, QSpacerItem, QTabWidget,
+    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -36,8 +36,8 @@ class Ui_Form(object):
         self.frame.setObjectName(u"frame")
         self.frame.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QFrame.Shadow.Raised)
-        self.verticalLayout_2 = QVBoxLayout(self.frame)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.horizontalLayout_16 = QHBoxLayout(self.frame)
+        self.horizontalLayout_16.setObjectName(u"horizontalLayout_16")
         self.widget_3 = QWidget(self.frame)
         self.widget_3.setObjectName(u"widget_3")
         self.horizontalLayout_4 = QHBoxLayout(self.widget_3)
@@ -54,7 +54,7 @@ class Ui_Form(object):
         self.horizontalLayout_4.addWidget(self.filenamelabel)
 
 
-        self.verticalLayout_2.addWidget(self.widget_3)
+        self.horizontalLayout_16.addWidget(self.widget_3)
 
         self.widget_4 = QWidget(self.frame)
         self.widget_4.setObjectName(u"widget_4")
@@ -72,7 +72,7 @@ class Ui_Form(object):
         self.horizontalLayout_5.addWidget(self.sizelabel)
 
 
-        self.verticalLayout_2.addWidget(self.widget_4)
+        self.horizontalLayout_16.addWidget(self.widget_4)
 
 
         self.horizontalLayout_3.addWidget(self.frame)
@@ -315,15 +315,30 @@ class Ui_Form(object):
 
         self.verticalLayout_4.addWidget(self.label_7)
 
-        self.btnTopsisWork = QPushButton(self.widget_8)
-        self.btnTopsisWork.setObjectName(u"btnTopsisWork")
+        self.label_9 = QLabel(self.widget_8)
+        self.label_9.setObjectName(u"label_9")
 
-        self.verticalLayout_4.addWidget(self.btnTopsisWork)
+        self.verticalLayout_4.addWidget(self.label_9)
+
+        self.topsisWeightMat = QTableWidget(self.widget_8)
+        self.topsisWeightMat.setObjectName(u"topsisWeightMat")
+
+        self.verticalLayout_4.addWidget(self.topsisWeightMat)
+
+        self.label_10 = QLabel(self.widget_8)
+        self.label_10.setObjectName(u"label_10")
+
+        self.verticalLayout_4.addWidget(self.label_10)
 
         self.topsisMatrix = QTableWidget(self.widget_8)
         self.topsisMatrix.setObjectName(u"topsisMatrix")
 
         self.verticalLayout_4.addWidget(self.topsisMatrix)
+
+        self.btnTopsisWork = QPushButton(self.widget_8)
+        self.btnTopsisWork.setObjectName(u"btnTopsisWork")
+
+        self.verticalLayout_4.addWidget(self.btnTopsisWork)
 
         self.btnTopsisOutput = QPushButton(self.widget_8)
         self.btnTopsisOutput.setObjectName(u"btnTopsisOutput")
@@ -336,6 +351,65 @@ class Ui_Form(object):
         self.tabWidget_2.addTab(self.tab_4, "")
         self.tab_5 = QWidget()
         self.tab_5.setObjectName(u"tab_5")
+        self.horizontalLayout_14 = QHBoxLayout(self.tab_5)
+        self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
+        self.widget_15 = QWidget(self.tab_5)
+        self.widget_15.setObjectName(u"widget_15")
+        self.verticalLayout_7 = QVBoxLayout(self.widget_15)
+        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.ewMat = QTableWidget(self.widget_15)
+        self.ewMat.setObjectName(u"ewMat")
+
+        self.verticalLayout_7.addWidget(self.ewMat)
+
+        self.btnEntropyWeight = QPushButton(self.widget_15)
+        self.btnEntropyWeight.setObjectName(u"btnEntropyWeight")
+
+        self.verticalLayout_7.addWidget(self.btnEntropyWeight)
+
+
+        self.horizontalLayout_14.addWidget(self.widget_15)
+
+        self.widget_16 = QWidget(self.tab_5)
+        self.widget_16.setObjectName(u"widget_16")
+        self.widget_16.setMinimumSize(QSize(100, 0))
+        self.horizontalLayout_15 = QHBoxLayout(self.widget_16)
+        self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
+        self.widget_17 = QWidget(self.widget_16)
+        self.widget_17.setObjectName(u"widget_17")
+        self.verticalLayout_11 = QVBoxLayout(self.widget_17)
+        self.verticalLayout_11.setObjectName(u"verticalLayout_11")
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_11.addItem(self.verticalSpacer)
+
+        self.label_8 = QLabel(self.widget_17)
+        self.label_8.setObjectName(u"label_8")
+        self.label_8.setMaximumSize(QSize(16777215, 50))
+
+        self.verticalLayout_11.addWidget(self.label_8)
+
+        self.ewToCB = QComboBox(self.widget_17)
+        self.ewToCB.addItem("")
+        self.ewToCB.setObjectName(u"ewToCB")
+
+        self.verticalLayout_11.addWidget(self.ewToCB)
+
+        self.btnTransEWBtn = QPushButton(self.widget_17)
+        self.btnTransEWBtn.setObjectName(u"btnTransEWBtn")
+
+        self.verticalLayout_11.addWidget(self.btnTransEWBtn)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_11.addItem(self.verticalSpacer_2)
+
+
+        self.horizontalLayout_15.addWidget(self.widget_17)
+
+
+        self.horizontalLayout_14.addWidget(self.widget_16)
+
         self.tabWidget_2.addTab(self.tab_5, "")
 
         self.horizontalLayout_2.addWidget(self.tabWidget_2)
@@ -392,10 +466,17 @@ class Ui_Form(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("Form", u"\u9884\u5904\u7406", None))
         self.label_5.setText(QCoreApplication.translate("Form", u"TextLabel", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_3), QCoreApplication.translate("Form", u"AHP", None))
-        self.label_7.setText(QCoreApplication.translate("Form", u"\u5728\u4f7f\u7528\u524d\u8bf7\u4fdd\u8bc1\u5df2\u6b63\u5411\u5316\u548c\u6807\u51c6\u5316", None))
+        self.label_7.setText(QCoreApplication.translate("Form", u"\u5728\u4f7f\u7528\u524d\u8bf7\u4fdd\u8bc1\u5df2\u6b63\u5411\u5316\u548c\u6807\u51c6\u5316*", None))
+        self.label_9.setText(QCoreApplication.translate("Form", u"\u6743\u91cd\u5206\u914d", None))
+        self.label_10.setText(QCoreApplication.translate("Form", u"\u5f97\u5206", None))
         self.btnTopsisWork.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb", None))
         self.btnTopsisOutput.setText(QCoreApplication.translate("Form", u"\u5bfc\u51fa", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_4), QCoreApplication.translate("Form", u"Topsis", None))
+        self.btnEntropyWeight.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb", None))
+        self.label_8.setText(QCoreApplication.translate("Form", u"Trans to", None))
+        self.ewToCB.setItemText(0, QCoreApplication.translate("Form", u"Topsis", None))
+
+        self.btnTransEWBtn.setText(QCoreApplication.translate("Form", u"Trans", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_5), QCoreApplication.translate("Form", u"\u71b5\u6743", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("Form", u"\u8bc4\u4ef7\u6a21\u578b", None))
     # retranslateUi
