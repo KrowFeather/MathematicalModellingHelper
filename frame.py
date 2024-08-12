@@ -1,11 +1,13 @@
 import os
 import sys
 
+import numpy as np
 from PySide6.QtWidgets import QWidget, QApplication, QFileDialog, QTableWidgetItem, QHeaderView
 from qt_material import apply_stylesheet
 
 from Functions.EvaluateModels.EntropyWeight import entropyWeight
 from Functions.EvaluateModels.Topsis import topsis
+from Functions.OperationsOptimization.LinearProgramming import linearProgramming
 from Functions.Preworks.Normalization import normalization
 from Functions.utils.OutputXlsx import outputXlsx
 from MMH import Ui_Form
@@ -26,11 +28,20 @@ class Frame(QWidget, Ui_Form):
         self.mat = None
         self.W = None
         self.EW = None
-
+        self.bounds = None
+        self.Aub = None
+        self.Bub = None
+        self.Aeq = None
+        self.Beq = None
+        self.C = None
+        self.LPtype = 1
         self.matrix_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.topsisWeightMat.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.topsisMatrix.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.ewMat.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.boundsMat.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.lpResMat.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.lptype_min.setChecked(True)
         self.bind()
 
     def bind(self):
@@ -45,6 +56,10 @@ class Frame(QWidget, Ui_Form):
         self.btnTopsisOutput.clicked.connect(lambda: self.outputXlsx(self.topsisMat))
         self.btnEntropyWeight.clicked.connect(lambda: self.startEW())
         self.btnTransEWBtn.clicked.connect(lambda: self.transWMatrixTo())
+        self.btnLP.clicked.connect(lambda: self.startLP())
+        self.btnLPPreload.clicked.connect(lambda: self.preloadLP())
+        self.lptype_min.clicked.connect(lambda: self.changeLPtype(1))
+        self.lptype_max.clicked.connect(lambda: self.changeLPtype(0))
 
     def open_file_dialog(self):
         file_name, _ = QFileDialog.getOpenFileName(
@@ -155,6 +170,50 @@ class Frame(QWidget, Ui_Form):
     def showTopsisWeightTable(self):
         for i in range(1, len(self.W)):
             self.topsisWeightMat.setItem(0, i - 1, QTableWidgetItem(str(self.W[i])))
+
+    def startLP(self):
+        res = linearProgramming(self.C, self.Aub, self.Bub, self.Aeq, self.Beq, self.bounds)
+        vec = res.x
+        sc = res.fun
+        if self.LPtype == 0:
+            sc = -sc
+        self.lpResMat.setColumnCount(len(vec))
+        self.lpResMat.setRowCount(1)
+        for i in range(len(vec)):
+            self.lpResMat.setItem(0, i, QTableWidgetItem(str(vec[i])))
+        self.lpvaLabel.setText(str(sc))
+
+    def preloadLP(self):
+        self.bounds = [[None for _ in range(2)] for _ in range(self.mat.shape[1] - 3)]
+        self.boundsMat.setRowCount(self.mat.shape[1] - 1)
+        self.boundsMat.setColumnCount(2)
+        for i in range(self.mat.shape[1] - 1):
+            for j in range(2):
+                self.boundsMat.setItem(i, j, QTableWidgetItem('None'))
+        self.C = None
+        for i in range(self.mat.shape[0]):
+            if self.mat[i][self.mat.shape[1] - 2] == 'c':
+                self.C = self.mat[i]
+        self.C = self.C[1:-2]
+        if self.LPtype == 0:
+            self.C *= -1
+        self.Aub = np.empty((0, self.mat.shape[1] - 3))
+        self.Bub = []
+        for i in range(self.mat.shape[0]):
+            if self.mat[i][self.mat.shape[1] - 2] == 'le':
+                tmp = self.mat[i]
+                tmp = tmp[1:-2]
+                self.Aub = np.append(self.Aub, [tmp], axis=0)
+                self.Bub.append(self.mat[i][self.mat.shape[1] - 1])
+            elif self.mat[i][self.mat.shape[1] - 2] == 'ge':
+                tmp = self.mat[0]
+                tmp = tmp[1:-2]
+                tmp = tmp * -1
+                self.Aub = np.append(self.Aub, [tmp], axis=0)
+                self.Bub.append(self.mat[i][self.mat.shape[1] - 1])
+
+    def changeLPtype(self, param):
+        self.LPtype = param
 
 
 def run():

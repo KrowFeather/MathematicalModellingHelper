@@ -15,16 +15,17 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QHBoxLayout,
-    QHeaderView, QLabel, QLineEdit, QPushButton,
-    QScrollArea, QSizePolicy, QSpacerItem, QTabWidget,
-    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGroupBox,
+    QHBoxLayout, QHeaderView, QLabel, QLineEdit,
+    QPushButton, QRadioButton, QScrollArea, QSizePolicy,
+    QSpacerItem, QTabWidget, QTableWidget, QTableWidgetItem,
+    QVBoxLayout, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(1057, 685)
+        Form.resize(875, 685)
         self.verticalLayout = QVBoxLayout(Form)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.widget = QWidget(Form)
@@ -103,11 +104,11 @@ class Ui_Form(object):
         self.widget_5.setObjectName(u"widget_5")
         self.horizontalLayout_6 = QHBoxLayout(self.widget_5)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.widget_6 = QWidget(self.widget_5)
-        self.widget_6.setObjectName(u"widget_6")
-        self.verticalLayout_3 = QVBoxLayout(self.widget_6)
+        self.matWidget = QWidget(self.widget_5)
+        self.matWidget.setObjectName(u"matWidget")
+        self.verticalLayout_3 = QVBoxLayout(self.matWidget)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.widget_7 = QWidget(self.widget_6)
+        self.widget_7 = QWidget(self.matWidget)
         self.widget_7.setObjectName(u"widget_7")
         self.horizontalLayout_7 = QHBoxLayout(self.widget_7)
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
@@ -129,13 +130,18 @@ class Ui_Form(object):
 
         self.verticalLayout_3.addWidget(self.widget_7)
 
-        self.matrix_table = QTableWidget(self.widget_6)
+        self.matrix_table = QTableWidget(self.matWidget)
         self.matrix_table.setObjectName(u"matrix_table")
 
         self.verticalLayout_3.addWidget(self.matrix_table)
 
 
-        self.horizontalLayout_6.addWidget(self.widget_6)
+        self.horizontalLayout_6.addWidget(self.matWidget)
+
+        self.widget_22 = QWidget(self.widget_5)
+        self.widget_22.setObjectName(u"widget_22")
+
+        self.horizontalLayout_6.addWidget(self.widget_22)
 
         self.tabWidget = QTabWidget(self.widget_5)
         self.tabWidget.setObjectName(u"tabWidget")
@@ -145,9 +151,6 @@ class Ui_Form(object):
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
         self.tabWidget_3 = QTabWidget(self.tab_2)
         self.tabWidget_3.setObjectName(u"tabWidget_3")
-        self.tab_6 = QWidget()
-        self.tab_6.setObjectName(u"tab_6")
-        self.tabWidget_3.addTab(self.tab_6, "")
         self.tab_7 = QWidget()
         self.tab_7.setObjectName(u"tab_7")
         self.verticalLayout_9 = QVBoxLayout(self.tab_7)
@@ -157,7 +160,7 @@ class Ui_Form(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 152, 388))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 463, 469))
         self.verticalLayout_10 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
         self.widget_9 = QWidget(self.scrollAreaWidgetContents)
@@ -469,6 +472,101 @@ class Ui_Form(object):
         self.horizontalLayout_2.addWidget(self.tabWidget_2)
 
         self.tabWidget.addTab(self.tab, "")
+        self.tab_9 = QWidget()
+        self.tab_9.setObjectName(u"tab_9")
+        self.horizontalLayout_18 = QHBoxLayout(self.tab_9)
+        self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
+        self.tabWidget_4 = QTabWidget(self.tab_9)
+        self.tabWidget_4.setObjectName(u"tabWidget_4")
+        self.tab_10 = QWidget()
+        self.tab_10.setObjectName(u"tab_10")
+        self.verticalLayout_13 = QVBoxLayout(self.tab_10)
+        self.verticalLayout_13.setObjectName(u"verticalLayout_13")
+        self.groupBox = QGroupBox(self.tab_10)
+        self.groupBox.setObjectName(u"groupBox")
+        self.groupBox.setMinimumSize(QSize(0, 100))
+        self.groupBox.setMaximumSize(QSize(16777215, 200))
+        self.horizontalLayout_19 = QHBoxLayout(self.groupBox)
+        self.horizontalLayout_19.setObjectName(u"horizontalLayout_19")
+        self.lptype_max = QRadioButton(self.groupBox)
+        self.lptype_max.setObjectName(u"lptype_max")
+
+        self.horizontalLayout_19.addWidget(self.lptype_max)
+
+        self.lptype_min = QRadioButton(self.groupBox)
+        self.lptype_min.setObjectName(u"lptype_min")
+
+        self.horizontalLayout_19.addWidget(self.lptype_min)
+
+
+        self.verticalLayout_13.addWidget(self.groupBox)
+
+        self.widget_20 = QWidget(self.tab_10)
+        self.widget_20.setObjectName(u"widget_20")
+        self.horizontalLayout_20 = QHBoxLayout(self.widget_20)
+        self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
+        self.widget_6 = QWidget(self.widget_20)
+        self.widget_6.setObjectName(u"widget_6")
+        self.verticalLayout_14 = QVBoxLayout(self.widget_6)
+        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
+        self.btnLPPreload = QPushButton(self.widget_6)
+        self.btnLPPreload.setObjectName(u"btnLPPreload")
+
+        self.verticalLayout_14.addWidget(self.btnLPPreload)
+
+        self.label_14 = QLabel(self.widget_6)
+        self.label_14.setObjectName(u"label_14")
+
+        self.verticalLayout_14.addWidget(self.label_14)
+
+        self.boundsMat = QTableWidget(self.widget_6)
+        self.boundsMat.setObjectName(u"boundsMat")
+
+        self.verticalLayout_14.addWidget(self.boundsMat)
+
+        self.btnLP = QPushButton(self.widget_6)
+        self.btnLP.setObjectName(u"btnLP")
+
+        self.verticalLayout_14.addWidget(self.btnLP)
+
+
+        self.horizontalLayout_20.addWidget(self.widget_6)
+
+        self.widget_21 = QWidget(self.widget_20)
+        self.widget_21.setObjectName(u"widget_21")
+        self.verticalLayout_15 = QVBoxLayout(self.widget_21)
+        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
+        self.label_15 = QLabel(self.widget_21)
+        self.label_15.setObjectName(u"label_15")
+
+        self.verticalLayout_15.addWidget(self.label_15)
+
+        self.lpResMat = QTableWidget(self.widget_21)
+        self.lpResMat.setObjectName(u"lpResMat")
+
+        self.verticalLayout_15.addWidget(self.lpResMat)
+
+        self.label_17 = QLabel(self.widget_21)
+        self.label_17.setObjectName(u"label_17")
+
+        self.verticalLayout_15.addWidget(self.label_17)
+
+        self.lpvaLabel = QLabel(self.widget_21)
+        self.lpvaLabel.setObjectName(u"lpvaLabel")
+
+        self.verticalLayout_15.addWidget(self.lpvaLabel)
+
+
+        self.horizontalLayout_20.addWidget(self.widget_21)
+
+
+        self.verticalLayout_13.addWidget(self.widget_20)
+
+        self.tabWidget_4.addTab(self.tab_10, "")
+
+        self.horizontalLayout_18.addWidget(self.tabWidget_4)
+
+        self.tabWidget.addTab(self.tab_9, "")
 
         self.horizontalLayout_6.addWidget(self.tabWidget)
 
@@ -479,8 +577,9 @@ class Ui_Form(object):
         self.retranslateUi(Form)
 
         self.tabWidget.setCurrentIndex(1)
-        self.tabWidget_3.setCurrentIndex(2)
+        self.tabWidget_3.setCurrentIndex(0)
         self.tabWidget_2.setCurrentIndex(0)
+        self.tabWidget_4.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -497,7 +596,6 @@ class Ui_Form(object):
         self.begin_index.setPlaceholderText(QCoreApplication.translate("Form", u"from", None))
         self.end_index.setPlaceholderText(QCoreApplication.translate("Form", u"to", None))
         self.btn_filter.setText(QCoreApplication.translate("Form", u"\u8fc7\u6ee4", None))
-        self.tabWidget_3.setTabText(self.tabWidget_3.indexOf(self.tab_6), QCoreApplication.translate("Form", u"\u5f52\u4e00\u5316", None))
         self.label_3.setText(QCoreApplication.translate("Form", u"\u6781\u5c0f\u578b\u6307\u6807", None))
         self.minMetricCols.setPlaceholderText(QCoreApplication.translate("Form", u"\u5217\u53f7\uff0c\u4ee5\u201c,\u201d\u5206\u9694", None))
         self.btnMinMetric.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb", None))
@@ -539,5 +637,16 @@ class Ui_Form(object):
         self.btnTransEWBtn.setText(QCoreApplication.translate("Form", u"Trans", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_5), QCoreApplication.translate("Form", u"\u71b5\u6743", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("Form", u"\u8bc4\u4ef7\u6a21\u578b", None))
+        self.groupBox.setTitle(QCoreApplication.translate("Form", u"\u76ee\u6807", None))
+        self.lptype_max.setText(QCoreApplication.translate("Form", u"Max", None))
+        self.lptype_min.setText(QCoreApplication.translate("Form", u"Min", None))
+        self.btnLPPreload.setText(QCoreApplication.translate("Form", u"preload", None))
+        self.label_14.setText(QCoreApplication.translate("Form", u"Bounds\uff08\u9ed8\u8ba4[-inf,inf]\uff09", None))
+        self.btnLP.setText(QCoreApplication.translate("Form", u"Start", None))
+        self.label_15.setText(QCoreApplication.translate("Form", u"\u89e3\u5411\u91cf", None))
+        self.label_17.setText(QCoreApplication.translate("Form", u"\u503c", None))
+        self.lpvaLabel.setText("")
+        self.tabWidget_4.setTabText(self.tabWidget_4.indexOf(self.tab_10), QCoreApplication.translate("Form", u"\u7ebf\u6027\u89c4\u5212", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_9), QCoreApplication.translate("Form", u"\u8fd0\u7b79\u4f18\u5316", None))
     # retranslateUi
 
