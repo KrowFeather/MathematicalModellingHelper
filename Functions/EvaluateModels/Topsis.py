@@ -1,7 +1,9 @@
+import copy
 import math
 
 
-def topsis(mat, W):
+def topsis(m, W):
+    mat = copy.copy(m)
     for i in range(mat.shape[0]):
         for j in range(1, mat.shape[1]):
             mat[i][j] *= W[j]
