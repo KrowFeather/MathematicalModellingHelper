@@ -160,7 +160,7 @@ class Ui_Form(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 463, 469))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 152, 388))
         self.verticalLayout_10 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
         self.widget_9 = QWidget(self.scrollAreaWidgetContents)
@@ -304,6 +304,11 @@ class Ui_Form(object):
         self.widget_18.setObjectName(u"widget_18")
         self.verticalLayout_2 = QVBoxLayout(self.widget_18)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.label_13 = QLabel(self.widget_18)
+        self.label_13.setObjectName(u"label_13")
+
+        self.verticalLayout_2.addWidget(self.label_13)
+
         self.label_5 = QLabel(self.widget_18)
         self.label_5.setObjectName(u"label_5")
 
@@ -314,15 +319,40 @@ class Ui_Form(object):
 
         self.verticalLayout_2.addWidget(self.ahpMat)
 
-        self.pushButton = QPushButton(self.widget_18)
-        self.pushButton.setObjectName(u"pushButton")
+        self.btnCheckAHP = QPushButton(self.widget_18)
+        self.btnCheckAHP.setObjectName(u"btnCheckAHP")
 
-        self.verticalLayout_2.addWidget(self.pushButton)
+        self.verticalLayout_2.addWidget(self.btnCheckAHP)
 
-        self.label_13 = QLabel(self.widget_18)
-        self.label_13.setObjectName(u"label_13")
+        self.ahpCheckLabel = QLabel(self.widget_18)
+        self.ahpCheckLabel.setObjectName(u"ahpCheckLabel")
 
-        self.verticalLayout_2.addWidget(self.label_13)
+        self.verticalLayout_2.addWidget(self.ahpCheckLabel)
+
+        self.ahpCalcWeightCB = QComboBox(self.widget_18)
+        self.ahpCalcWeightCB.addItem("")
+        self.ahpCalcWeightCB.addItem("")
+        self.ahpCalcWeightCB.addItem("")
+        self.ahpCalcWeightCB.setObjectName(u"ahpCalcWeightCB")
+
+        self.verticalLayout_2.addWidget(self.ahpCalcWeightCB)
+
+        self.btnStartAHP = QPushButton(self.widget_18)
+        self.btnStartAHP.setObjectName(u"btnStartAHP")
+
+        self.verticalLayout_2.addWidget(self.btnStartAHP)
+
+        self.AHPweightMatTable = QTableWidget(self.widget_18)
+        self.AHPweightMatTable.setObjectName(u"AHPweightMatTable")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.AHPweightMatTable.sizePolicy().hasHeightForWidth())
+        self.AHPweightMatTable.setSizePolicy(sizePolicy)
+        self.AHPweightMatTable.setMinimumSize(QSize(0, 90))
+        self.AHPweightMatTable.setMaximumSize(QSize(16777215, 90))
+
+        self.verticalLayout_2.addWidget(self.AHPweightMatTable)
 
 
         self.horizontalLayout_17.addWidget(self.widget_18)
@@ -340,16 +370,16 @@ class Ui_Form(object):
 
         self.verticalLayout_12.addWidget(self.label_11)
 
-        self.comboBox = QComboBox(self.widget_19)
-        self.comboBox.addItem("")
-        self.comboBox.setObjectName(u"comboBox")
+        self.transAHPCB = QComboBox(self.widget_19)
+        self.transAHPCB.addItem("")
+        self.transAHPCB.setObjectName(u"transAHPCB")
 
-        self.verticalLayout_12.addWidget(self.comboBox)
+        self.verticalLayout_12.addWidget(self.transAHPCB)
 
-        self.pushButton_2 = QPushButton(self.widget_19)
-        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.btnTransAHPTo = QPushButton(self.widget_19)
+        self.btnTransAHPTo.setObjectName(u"btnTransAHPTo")
 
-        self.verticalLayout_12.addWidget(self.pushButton_2)
+        self.verticalLayout_12.addWidget(self.btnTransAHPTo)
 
         self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -616,13 +646,19 @@ class Ui_Form(object):
         self.tabWidget_3.setTabText(self.tabWidget_3.indexOf(self.tab_8), QCoreApplication.translate("Form", u"\u6807\u51c6\u5316", None))
         self.label_4.setText("")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("Form", u"\u9884\u5904\u7406", None))
+        self.label_13.setText(QCoreApplication.translate("Form", u"\u652f\u6301n\u5c0f\u4e8e\u7b49\u4e8e15", None))
         self.label_5.setText(QCoreApplication.translate("Form", u"\u6743\u91cd\u77e9\u9635", None))
-        self.pushButton.setText(QCoreApplication.translate("Form", u"Check", None))
-        self.label_13.setText(QCoreApplication.translate("Form", u"TextLabel", None))
-        self.label_11.setText(QCoreApplication.translate("Form", u"Trans to", None))
-        self.comboBox.setItemText(0, QCoreApplication.translate("Form", u"Topsis", None))
+        self.btnCheckAHP.setText(QCoreApplication.translate("Form", u"Check", None))
+        self.ahpCheckLabel.setText("")
+        self.ahpCalcWeightCB.setItemText(0, QCoreApplication.translate("Form", u"\u7b97\u672f\u5e73\u5747\u6cd5", None))
+        self.ahpCalcWeightCB.setItemText(1, QCoreApplication.translate("Form", u"\u51e0\u4f55\u5e73\u5747\u6cd5", None))
+        self.ahpCalcWeightCB.setItemText(2, QCoreApplication.translate("Form", u"\u7279\u5f81\u503c\u6cd5", None))
 
-        self.pushButton_2.setText(QCoreApplication.translate("Form", u"Trans", None))
+        self.btnStartAHP.setText(QCoreApplication.translate("Form", u"start", None))
+        self.label_11.setText(QCoreApplication.translate("Form", u"Trans to", None))
+        self.transAHPCB.setItemText(0, QCoreApplication.translate("Form", u"Topsis", None))
+
+        self.btnTransAHPTo.setText(QCoreApplication.translate("Form", u"Trans", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_3), QCoreApplication.translate("Form", u"AHP", None))
         self.label_7.setText(QCoreApplication.translate("Form", u"\u5728\u4f7f\u7528\u524d\u8bf7\u4fdd\u8bc1\u5df2\u6b63\u5411\u5316\u548c\u6807\u51c6\u5316*", None))
         self.label_9.setText(QCoreApplication.translate("Form", u"\u6743\u91cd\u5206\u914d", None))

@@ -1,4 +1,4 @@
-import frame
+import Frame
 
 if __name__ == '__main__':
-    frame.run()
+    Frame.run()

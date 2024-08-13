@@ -5,6 +5,7 @@ import numpy as np
 from PySide6.QtWidgets import QWidget, QApplication, QFileDialog, QTableWidgetItem, QHeaderView
 from qt_material import apply_stylesheet
 
+from Functions.EvaluateModels.AHP import checkAHPAvailable, arithmeticMeanMethod, geometricMeanMethod, eigenvalueMethod
 from Functions.EvaluateModels.EntropyWeight import entropyWeight
 from Functions.EvaluateModels.Topsis import topsis
 from Functions.OperationsOptimization.LinearProgramming import linearProgramming
@@ -34,13 +35,18 @@ class Frame(QWidget, Ui_Form):
         self.Aeq = None
         self.Beq = None
         self.C = None
+        self.aMat = None
+        self.AHPW = None
         self.LPtype = 1
+        self.btnStartAHP.setEnabled(False)
         self.matrix_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.topsisWeightMat.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.topsisMatrix.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.ewMat.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.boundsMat.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.lpResMat.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.ahpMat.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.AHPweightMatTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.lptype_min.setChecked(True)
         self.bind()
 
@@ -56,10 +62,14 @@ class Frame(QWidget, Ui_Form):
         self.btnTopsisOutput.clicked.connect(lambda: self.outputXlsx(self.topsisMat))
         self.btnEntropyWeight.clicked.connect(lambda: self.startEW())
         self.btnTransEWBtn.clicked.connect(lambda: self.transWMatrixTo())
+        self.btnTransAHPTo.clicked.connect(lambda: self.transAHPWMatrixTo())
         self.btnLP.clicked.connect(lambda: self.startLP())
         self.btnLPPreload.clicked.connect(lambda: self.preloadLP())
         self.lptype_min.clicked.connect(lambda: self.changeLPtype(1))
         self.lptype_max.clicked.connect(lambda: self.changeLPtype(0))
+        self.btnCheckAHP.clicked.connect(lambda: self.checkAHP())
+        self.ahpMat.itemChanged.connect(self.ahpItemChanged)
+        self.btnStartAHP.clicked.connect(lambda: self.startAHP())
 
     def open_file_dialog(self):
         file_name, _ = QFileDialog.getOpenFileName(
@@ -77,9 +87,17 @@ class Frame(QWidget, Ui_Form):
         (_, extension) = os.path.splitext(filename)
         self.df = pd.read_excel(filename)
         self.mat = self.df.to_numpy()
+        self.btnStartAHP.setEnabled(False)
         self.sizelabel.setText(f"{self.mat.shape[0], self.mat.shape[1] - 1}")
         self.topsisWeightMat.setRowCount(1)
         self.topsisWeightMat.setColumnCount(self.mat.shape[1] - 1)
+        self.ahpMat.setRowCount(self.mat.shape[1] - 1)
+        self.ahpMat.setColumnCount(self.mat.shape[1] - 1)
+        self.topsisMatrix.clear()
+        for i in range(self.mat.shape[1] - 1):
+            for j in range(self.mat.shape[1] - 1):
+                if i == j:
+                    self.ahpMat.setItem(i, j, QTableWidgetItem(str(1)))
         self.W = [1 for _ in range(self.mat.shape[1])]
         self.showTable()
         self.showTopsisWeightTable()
@@ -122,7 +140,6 @@ class Frame(QWidget, Ui_Form):
         r = int(self.intervalEndPoint.text())
         intervalMetrice(self.mat, cols, l, r)
         self.showTable()
-        pass
 
     def outputXlsx(self, mat):
         file_path, _ = QFileDialog.getSaveFileName(
@@ -214,6 +231,52 @@ class Frame(QWidget, Ui_Form):
 
     def changeLPtype(self, param):
         self.LPtype = param
+
+    def checkAHP(self):
+        m = [[0 for _ in range(self.mat.shape[1] - 1)] for _ in range(self.mat.shape[1] - 1)]
+        for i in range(1, self.mat.shape[1]):
+            for j in range(1, self.mat.shape[1]):
+                m[i - 1][j - 1] = float(self.ahpMat.item(i - 1, j - 1).text())
+        m = np.array(m)
+        print(m)
+        flag = checkAHPAvailable(m)
+        if flag:
+            self.btnStartAHP.setEnabled(True)
+            self.aMat = m
+            self.ahpCheckLabel.setText("一致性检验通过")
+        else:
+            self.ahpCheckLabel.setText("一致性检验未通过")
+
+    def ahpItemChanged(self, item):
+        try:
+            self.ahpMat.setItem(item.column(), item.row(), QTableWidgetItem(str(1 / int(item.text()))))
+        except:
+            print(item.row(), item.column())
+
+    def startAHP(self):
+        ahpType = self.ahpCalcWeightCB.currentIndex()
+        print(ahpType)
+        if ahpType == 0:
+            self.AHPW = arithmeticMeanMethod(self.aMat)
+        elif ahpType == 1:
+            self.AHPW = geometricMeanMethod(self.aMat)
+        else:
+            self.AHPW = eigenvalueMethod(self.aMat)
+        print(self.AHPW)
+        self.showAHPWeightMatrix()
+
+    def transAHPWMatrixTo(self):
+        selected_text = self.transAHPCB.currentText()
+        if selected_text == 'Topsis':
+            self.W = self.AHPW
+            self.W = np.pad(self.W, (1, 0), mode='constant')
+            self.showTopsisWeightTable()
+
+    def showAHPWeightMatrix(self):
+        self.AHPweightMatTable.setRowCount(1)
+        self.AHPweightMatTable.setColumnCount(len(self.AHPW))
+        for i in range(len(self.AHPW)):
+            self.AHPweightMatTable.setItem(0, i, QTableWidgetItem(str(self.AHPW[i])))
 
 
 def run():

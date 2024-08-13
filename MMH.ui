@@ -194,8 +194,8 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>463</width>
-                   <height>469</height>
+                   <width>152</width>
+                   <height>388</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -384,6 +384,13 @@
                <widget class="QWidget" name="widget_18" native="true">
                 <layout class="QVBoxLayout" name="verticalLayout_2">
                  <item>
+                  <widget class="QLabel" name="label_13">
+                   <property name="text">
+                    <string>支持n小于等于15</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <widget class="QLabel" name="label_5">
                    <property name="text">
                     <string>权重矩阵</string>
@@ -394,16 +401,64 @@
                   <widget class="QTableWidget" name="ahpMat"/>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton">
+                  <widget class="QPushButton" name="btnCheckAHP">
                    <property name="text">
                     <string>Check</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLabel" name="label_13">
+                  <widget class="QLabel" name="ahpCheckLabel">
                    <property name="text">
-                    <string>TextLabel</string>
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="ahpCalcWeightCB">
+                   <item>
+                    <property name="text">
+                     <string>算术平均法</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>几何平均法</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>特征值法</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btnStartAHP">
+                   <property name="text">
+                    <string>start</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QTableWidget" name="AHPweightMatTable">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>90</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>90</height>
+                    </size>
                    </property>
                   </widget>
                  </item>
@@ -434,7 +489,7 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBox">
+                  <widget class="QComboBox" name="transAHPCB">
                    <item>
                     <property name="text">
                      <string>Topsis</string>
@@ -443,7 +498,7 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_2">
+                  <widget class="QPushButton" name="btnTransAHPTo">
                    <property name="text">
                     <string>Trans</string>
                    </property>
