@@ -162,12 +162,24 @@
        </widget>
       </item>
       <item>
-       <widget class="QWidget" name="widget_22" native="true"/>
+       <widget class="QWidget" name="graphicviewWidget" native="true">
+        <layout class="QHBoxLayout" name="horizontalLayout_21">
+         <item>
+          <widget class="QWebEngineView" name="webEngineView">
+           <property name="url">
+            <url>
+             <string>about:blank</string>
+            </url>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </item>
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tab_2">
          <attribute name="title">
@@ -194,8 +206,8 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>152</width>
-                   <height>388</height>
+                   <width>459</width>
+                   <height>469</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -798,6 +810,45 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="tab_6">
+         <attribute name="title">
+          <string>回归分析</string>
+         </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_22">
+          <item>
+           <widget class="QTabWidget" name="tabWidget_5">
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <widget class="QWidget" name="tab_11">
+             <attribute name="title">
+              <string>一元线性回归</string>
+             </attribute>
+             <layout class="QHBoxLayout" name="horizontalLayout_24">
+              <item>
+               <widget class="QWidget" name="widget_22" native="true">
+                <layout class="QHBoxLayout" name="horizontalLayout_23">
+                 <item>
+                  <widget class="QPushButton" name="btnStartSVLR">
+                   <property name="text">
+                    <string>start</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="tab_12">
+             <attribute name="title">
+              <string>Tab 2</string>
+             </attribute>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -805,6 +856,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QWebEngineView</class>
+   <extends>QWidget</extends>
+   <header location="global">QtWebEngineWidgets/QWebEngineView</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

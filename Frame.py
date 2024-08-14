@@ -2,6 +2,7 @@ import os
 import sys
 
 import numpy as np
+from PySide6.QtCore import QUrl
 from PySide6.QtWidgets import QWidget, QApplication, QFileDialog, QTableWidgetItem, QHeaderView
 from qt_material import apply_stylesheet
 
@@ -10,6 +11,8 @@ from Functions.EvaluateModels.EntropyWeight import entropyWeight
 from Functions.EvaluateModels.Topsis import topsis
 from Functions.OperationsOptimization.LinearProgramming import linearProgramming
 from Functions.Preworks.Normalization import normalization
+from Functions.Regression.LinearRegression import singleVarLinearRegression
+from Functions.utils.DrawPlot import Figure
 from Functions.utils.OutputXlsx import outputXlsx
 from MMH import Ui_Form
 import pandas as pd
@@ -38,6 +41,7 @@ class Frame(QWidget, Ui_Form):
         self.aMat = None
         self.AHPW = None
         self.LPtype = 1
+        self.graphicviewWidget.hide()
         self.btnStartAHP.setEnabled(False)
         self.matrix_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.topsisWeightMat.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
@@ -70,6 +74,8 @@ class Frame(QWidget, Ui_Form):
         self.btnCheckAHP.clicked.connect(lambda: self.checkAHP())
         self.ahpMat.itemChanged.connect(self.ahpItemChanged)
         self.btnStartAHP.clicked.connect(lambda: self.startAHP())
+        self.tabWidget.currentChanged.connect(self.onCurrentTabChanged)
+        self.btnStartSVLR.clicked.connect(lambda: self.startSVLR())
 
     def open_file_dialog(self):
         file_name, _ = QFileDialog.getOpenFileName(
@@ -277,6 +283,29 @@ class Frame(QWidget, Ui_Form):
         self.AHPweightMatTable.setColumnCount(len(self.AHPW))
         for i in range(len(self.AHPW)):
             self.AHPweightMatTable.setItem(0, i, QTableWidgetItem(str(self.AHPW[i])))
+
+    def onCurrentTabChanged(self, index):
+        if index == 3:
+            self.graphicviewWidget.show()
+            self.matWidget.setMaximumWidth(300)
+            self.graphicviewWidget.setMinimumWidth(500)
+            self.tabWidget.setMaximumWidth(400)
+        else:
+            self.graphicviewWidget.hide()
+            self.matWidget.setMaximumWidth(114514)
+            self.tabWidget.setMaximumWidth(114514)
+        pass
+
+    def startSVLR(self):
+        w, b = singleVarLinearRegression(self.mat)
+        x = self.mat[:, 1]
+        y = self.mat[:, 2]
+        fig = Figure()
+        fig.draw2DScatterPlot(x, y)
+        fig.drawLinearFunction(w, b, [np.min(x)-2, np.max(x)+2])
+        fig.save('SVLRgraph.html')
+        self.webEngineView.load(
+            QUrl.fromLocalFile(os.path.abspath(f'SVLRgraph.html')))
 
 
 def run():

@@ -15,6 +15,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGroupBox,
     QHBoxLayout, QHeaderView, QLabel, QLineEdit,
     QPushButton, QRadioButton, QScrollArea, QSizePolicy,
@@ -138,10 +139,18 @@ class Ui_Form(object):
 
         self.horizontalLayout_6.addWidget(self.matWidget)
 
-        self.widget_22 = QWidget(self.widget_5)
-        self.widget_22.setObjectName(u"widget_22")
+        self.graphicviewWidget = QWidget(self.widget_5)
+        self.graphicviewWidget.setObjectName(u"graphicviewWidget")
+        self.horizontalLayout_21 = QHBoxLayout(self.graphicviewWidget)
+        self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
+        self.webEngineView = QWebEngineView(self.graphicviewWidget)
+        self.webEngineView.setObjectName(u"webEngineView")
+        self.webEngineView.setUrl(QUrl(u"about:blank"))
 
-        self.horizontalLayout_6.addWidget(self.widget_22)
+        self.horizontalLayout_21.addWidget(self.webEngineView)
+
+
+        self.horizontalLayout_6.addWidget(self.graphicviewWidget)
 
         self.tabWidget = QTabWidget(self.widget_5)
         self.tabWidget.setObjectName(u"tabWidget")
@@ -160,7 +169,7 @@ class Ui_Form(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 152, 388))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 459, 469))
         self.verticalLayout_10 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
         self.widget_9 = QWidget(self.scrollAreaWidgetContents)
@@ -597,6 +606,36 @@ class Ui_Form(object):
         self.horizontalLayout_18.addWidget(self.tabWidget_4)
 
         self.tabWidget.addTab(self.tab_9, "")
+        self.tab_6 = QWidget()
+        self.tab_6.setObjectName(u"tab_6")
+        self.horizontalLayout_22 = QHBoxLayout(self.tab_6)
+        self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
+        self.tabWidget_5 = QTabWidget(self.tab_6)
+        self.tabWidget_5.setObjectName(u"tabWidget_5")
+        self.tab_11 = QWidget()
+        self.tab_11.setObjectName(u"tab_11")
+        self.horizontalLayout_24 = QHBoxLayout(self.tab_11)
+        self.horizontalLayout_24.setObjectName(u"horizontalLayout_24")
+        self.widget_22 = QWidget(self.tab_11)
+        self.widget_22.setObjectName(u"widget_22")
+        self.horizontalLayout_23 = QHBoxLayout(self.widget_22)
+        self.horizontalLayout_23.setObjectName(u"horizontalLayout_23")
+        self.btnStartSVLR = QPushButton(self.widget_22)
+        self.btnStartSVLR.setObjectName(u"btnStartSVLR")
+
+        self.horizontalLayout_23.addWidget(self.btnStartSVLR)
+
+
+        self.horizontalLayout_24.addWidget(self.widget_22)
+
+        self.tabWidget_5.addTab(self.tab_11, "")
+        self.tab_12 = QWidget()
+        self.tab_12.setObjectName(u"tab_12")
+        self.tabWidget_5.addTab(self.tab_12, "")
+
+        self.horizontalLayout_22.addWidget(self.tabWidget_5)
+
+        self.tabWidget.addTab(self.tab_6, "")
 
         self.horizontalLayout_6.addWidget(self.tabWidget)
 
@@ -606,10 +645,11 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         self.tabWidget_3.setCurrentIndex(0)
         self.tabWidget_2.setCurrentIndex(0)
         self.tabWidget_4.setCurrentIndex(0)
+        self.tabWidget_5.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -684,5 +724,9 @@ class Ui_Form(object):
         self.lpvaLabel.setText("")
         self.tabWidget_4.setTabText(self.tabWidget_4.indexOf(self.tab_10), QCoreApplication.translate("Form", u"\u7ebf\u6027\u89c4\u5212", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_9), QCoreApplication.translate("Form", u"\u8fd0\u7b79\u4f18\u5316", None))
+        self.btnStartSVLR.setText(QCoreApplication.translate("Form", u"start", None))
+        self.tabWidget_5.setTabText(self.tabWidget_5.indexOf(self.tab_11), QCoreApplication.translate("Form", u"\u4e00\u5143\u7ebf\u6027\u56de\u5f52", None))
+        self.tabWidget_5.setTabText(self.tabWidget_5.indexOf(self.tab_12), QCoreApplication.translate("Form", u"Tab 2", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6), QCoreApplication.translate("Form", u"\u56de\u5f52\u5206\u6790", None))
     # retranslateUi
 
