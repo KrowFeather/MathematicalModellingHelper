@@ -196,7 +196,7 @@ class Ui_Form(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 250, 469))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 152, 388))
         self.verticalLayout_10 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
         self.widget_9 = QWidget(self.scrollAreaWidgetContents)
@@ -647,9 +647,10 @@ class Ui_Form(object):
         self.widget_22.setObjectName(u"widget_22")
         self.verticalLayout_16 = QVBoxLayout(self.widget_22)
         self.verticalLayout_16.setObjectName(u"verticalLayout_16")
-        self.verticalSpacer_5 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.label_19 = QLabel(self.widget_22)
+        self.label_19.setObjectName(u"label_19")
 
-        self.verticalLayout_16.addItem(self.verticalSpacer_5)
+        self.verticalLayout_16.addWidget(self.label_19)
 
         self.SVLRcb = QComboBox(self.widget_22)
         self.SVLRcb.addItem("")
@@ -659,14 +660,47 @@ class Ui_Form(object):
 
         self.verticalLayout_16.addWidget(self.SVLRcb)
 
+        self.widget_28 = QWidget(self.widget_22)
+        self.widget_28.setObjectName(u"widget_28")
+        self.horizontalLayout_28 = QHBoxLayout(self.widget_28)
+        self.horizontalLayout_28.setObjectName(u"horizontalLayout_28")
+        self.SVLRiternum = QLineEdit(self.widget_28)
+        self.SVLRiternum.setObjectName(u"SVLRiternum")
+
+        self.horizontalLayout_28.addWidget(self.SVLRiternum)
+
+        self.SVLRalpha = QLineEdit(self.widget_28)
+        self.SVLRalpha.setObjectName(u"SVLRalpha")
+
+        self.horizontalLayout_28.addWidget(self.SVLRalpha)
+
+
+        self.verticalLayout_16.addWidget(self.widget_28)
+
         self.btnStartSVLR = QPushButton(self.widget_22)
         self.btnStartSVLR.setObjectName(u"btnStartSVLR")
 
         self.verticalLayout_16.addWidget(self.btnStartSVLR)
 
-        self.verticalSpacer_6 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.SVLRansLabel = QLabel(self.widget_22)
+        self.SVLRansLabel.setObjectName(u"SVLRansLabel")
 
-        self.verticalLayout_16.addItem(self.verticalSpacer_6)
+        self.verticalLayout_16.addWidget(self.SVLRansLabel)
+
+        self.label_21 = QLabel(self.widget_22)
+        self.label_21.setObjectName(u"label_21")
+
+        self.verticalLayout_16.addWidget(self.label_21)
+
+        self.SVLRPredTable = QTableWidget(self.widget_22)
+        self.SVLRPredTable.setObjectName(u"SVLRPredTable")
+
+        self.verticalLayout_16.addWidget(self.SVLRPredTable)
+
+        self.btnStartSVLRPred = QPushButton(self.widget_22)
+        self.btnStartSVLRPred.setObjectName(u"btnStartSVLRPred")
+
+        self.verticalLayout_16.addWidget(self.btnStartSVLRPred)
 
 
         self.horizontalLayout_24.addWidget(self.widget_22)
@@ -680,6 +714,23 @@ class Ui_Form(object):
         self.widget_25.setObjectName(u"widget_25")
         self.verticalLayout_18 = QVBoxLayout(self.widget_25)
         self.verticalLayout_18.setObjectName(u"verticalLayout_18")
+        self.widget_27 = QWidget(self.widget_25)
+        self.widget_27.setObjectName(u"widget_27")
+        self.horizontalLayout_27 = QHBoxLayout(self.widget_27)
+        self.horizontalLayout_27.setObjectName(u"horizontalLayout_27")
+        self.MVLRiternum = QLineEdit(self.widget_27)
+        self.MVLRiternum.setObjectName(u"MVLRiternum")
+
+        self.horizontalLayout_27.addWidget(self.MVLRiternum)
+
+        self.MVLRalpha = QLineEdit(self.widget_27)
+        self.MVLRalpha.setObjectName(u"MVLRalpha")
+
+        self.horizontalLayout_27.addWidget(self.MVLRalpha)
+
+
+        self.verticalLayout_18.addWidget(self.widget_27)
+
         self.widget_23 = QWidget(self.widget_25)
         self.widget_23.setObjectName(u"widget_23")
         self.horizontalLayout_21 = QHBoxLayout(self.widget_23)
@@ -748,7 +799,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.tabWidget.setCurrentIndex(3)
+        self.tabWidget.setCurrentIndex(0)
         self.tabWidget_3.setCurrentIndex(1)
         self.tabWidget_2.setCurrentIndex(2)
         self.tabWidget_4.setCurrentIndex(0)
@@ -827,12 +878,20 @@ class Ui_Form(object):
         self.lpvaLabel.setText("")
         self.tabWidget_4.setTabText(self.tabWidget_4.indexOf(self.tab_10), QCoreApplication.translate("Form", u"\u7ebf\u6027\u89c4\u5212", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_9), QCoreApplication.translate("Form", u"\u8fd0\u7b79\u4f18\u5316", None))
+        self.label_19.setText(QCoreApplication.translate("Form", u"\u8bad\u7ec3", None))
         self.SVLRcb.setItemText(0, QCoreApplication.translate("Form", u"\u6700\u5c0f\u4e8c\u4e58\u6cd5\uff08\u95ed\u5f0f\u89e3\uff09", None))
         self.SVLRcb.setItemText(1, QCoreApplication.translate("Form", u"SKlearn OLS", None))
         self.SVLRcb.setItemText(2, QCoreApplication.translate("Form", u"GD\uff08\u5c40\u90e8\u6700\u4f18\uff09", None))
 
+        self.SVLRiternum.setPlaceholderText(QCoreApplication.translate("Form", u"\u8fed\u4ee3\u6b21\u6570", None))
+        self.SVLRalpha.setPlaceholderText(QCoreApplication.translate("Form", u"\u5b66\u4e60\u7387", None))
         self.btnStartSVLR.setText(QCoreApplication.translate("Form", u"start", None))
+        self.SVLRansLabel.setText("")
+        self.label_21.setText(QCoreApplication.translate("Form", u"\u9884\u6d4b", None))
+        self.btnStartSVLRPred.setText(QCoreApplication.translate("Form", u"start", None))
         self.regressionTabs.setTabText(self.regressionTabs.indexOf(self.tab_11), QCoreApplication.translate("Form", u"\u4e00\u5143\u7ebf\u6027\u56de\u5f52", None))
+        self.MVLRiternum.setPlaceholderText(QCoreApplication.translate("Form", u"\u8fed\u4ee3\u6b21\u6570", None))
+        self.MVLRalpha.setPlaceholderText(QCoreApplication.translate("Form", u"\u5b66\u4e60\u7387", None))
         self.label_16.setText(QCoreApplication.translate("Form", u"\u8bad\u7ec3", None))
         self.btnMVLRTrain.setText(QCoreApplication.translate("Form", u"Train", None))
         self.label_18.setText(QCoreApplication.translate("Form", u"\u9884\u6d4b", None))

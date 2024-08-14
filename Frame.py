@@ -12,6 +12,7 @@ from Functions.EvaluateModels.Topsis import topsis
 from Functions.OperationsOptimization.LinearProgramming import linearProgramming
 from Functions.Preworks.Normalization import normalization
 from Functions.Preworks.PositiveTransformation import *
+from Functions.Regression import SingleVarLinearRegression
 from Functions.Regression.MultiVarLinearRegression import gradientDescent
 from Functions.Regression.SingleVarLinearRegression import singleVarLinearRegressionOLS, singleVarLinearRegressionSKL
 from Functions.utils.DrawPlot import Figure
@@ -22,6 +23,8 @@ from MMH import Ui_Form
 class Frame(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
+        self.mvlrb = None
+        self.mvlrw = None
         self.topsisMat = None
         self.fileName = None
         self.setupUi(self)
@@ -40,6 +43,8 @@ class Frame(QWidget, Ui_Form):
         self.C = None
         self.aMat = None
         self.AHPW = None
+        self.svlrw = 0
+        self.svlrb = 0
         self.LPtype = 1
         self.graphicviewWidget.hide()
         self.btnStartAHP.setEnabled(False)
@@ -53,6 +58,8 @@ class Frame(QWidget, Ui_Form):
         self.AHPweightMatTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.MVLRPredictResultTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.MVLRtrainmat.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.SVLRPredTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.SVLRiternum.hide()
         self.lptype_min.setChecked(True)
         self.bind()
 
@@ -78,8 +85,10 @@ class Frame(QWidget, Ui_Form):
         self.btnStartAHP.clicked.connect(lambda: self.startAHP())
         self.tabWidget.currentChanged.connect(self.onCurrentTabChanged)
         self.btnStartSVLR.clicked.connect(lambda: self.startSVLR())
+        self.SVLRcb.currentIndexChanged.connect(self.SVLRcbchanged)
         self.btnMVLRTrain.clicked.connect(lambda: self.startMVLRTrain())
         self.btnMVLRPred.clicked.connect(lambda: self.startMVLRPred())
+        self.btnStartSVLRPred.clicked.connect(lambda: self.startSVLRPred())
 
     def open_file_dialog(self):
         file_name, _ = QFileDialog.getOpenFileName(
@@ -97,6 +106,7 @@ class Frame(QWidget, Ui_Form):
         (_, extension) = os.path.splitext(filename)
         self.df = pd.read_excel(filename)
         self.mat = self.df.to_numpy()
+        print(self.mat.shape[1])
         self.btnStartAHP.setEnabled(False)
         self.sizelabel.setText(f"{self.mat.shape[0], self.mat.shape[1] - 1}")
         self.topsisWeightMat.setRowCount(1)
@@ -312,12 +322,17 @@ class Frame(QWidget, Ui_Form):
             w, b = singleVarLinearRegressionSKL(x, y)
             w = w[0]
         else:
-            w, b, loss = gradientDescent(x, y)
+            iter = int(self.SVLRiternum.text())
+            alpha = float(self.SVLRalpha.text())
+            w, b, loss = SingleVarLinearRegression.gradientDescent(x, y, iter, alpha)
             fig1 = Figure()
             fig1.draw2DScatterPlot(range(1, len(loss) + 1), loss, 1)
             fig1.save('SVLRLossFunc.html')
             self.webEngineView_2.load(
                 QUrl.fromLocalFile(os.path.abspath(f'SVLRLossFunc.html')))
+        self.svlrw = w
+        self.svlrb = b
+        self.SVLRansLabel.setText(f"w = {self.svlrw}  b = {self.svlrb}")
         fig = Figure()
         fig.draw2DScatterPlot(x, y, 0)
         fig.drawLinearFunction(w, b, [np.min(x) - 2, np.max(x) + 2])
@@ -327,13 +342,42 @@ class Frame(QWidget, Ui_Form):
 
     def startMVLRTrain(self):
         y = self.mat[:, self.mat.shape[1] - 1]
-        print(y)
-        x = self.mat[:, ]
-        y = self.mat[:, 2]
+        x = self.mat[:, 1:self.mat.shape[1] - 1]
+        w, b, loss = gradientDescent(x, y, int(self.MVLRiternum.text()), float(self.MVLRalpha.text()))
+        self.mvlrw = w
+        self.mvlrb = b
+        fig1 = Figure()
+        fig1.draw2DScatterPlot(range(1, len(loss) + 1), loss, 1)
+        fig1.save('MVLRLossFunc.html')
+        self.webEngineView_2.load(
+            QUrl.fromLocalFile(os.path.abspath(f'MVLRLossFunc.html')))
 
     def startMVLRPred(self):
+        print('mvlrw', self.mvlrw)
+        ans = [0 for _ in range(self.mat.shape[0])]
+        for i in range(self.mat.shape[0]):
+            for j in range(1, self.mat.shape[1]):
+                ans[i] += self.mvlrw[j - 1] * self.mat[i][j]
+            ans[i] += self.mvlrb
+        print(ans)
+        self.MVLRPredictResultTable.setRowCount(len(ans))
+        self.MVLRPredictResultTable.setColumnCount(1)
+        for i in range(len(ans)):
+            self.SVLRPredTable.setItem(i, 0, QTableWidgetItem(str(ans[i])))
 
-        pass
+    def SVLRcbchanged(self, index):
+        if index == 2:
+            self.SVLRiternum.show()
+
+    def startSVLRPred(self):
+        ans = [0 for _ in range(self.mat.shape[0])]
+        M = self.mat[:, 1]
+        for i in range(self.mat.shape[0]):
+            ans[i] = self.svlrw * M[i] + self.svlrb
+        self.SVLRPredTable.setRowCount(len(ans))
+        self.SVLRPredTable.setColumnCount(1)
+        for i in range(len(ans)):
+            self.SVLRPredTable.setItem(i, 0, QTableWidgetItem(str(ans[i])))
 
 
 def run():

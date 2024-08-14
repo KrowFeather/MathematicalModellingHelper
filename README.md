@@ -1,5 +1,5 @@
 # MathematicalModellingHelper
-目前实现了正向化，标准化，Topsis，熵权-Topsis，AHP，AHP-Topsis，一元线性回归
+目前实现了正向化，标准化，Topsis，熵权-Topsis，AHP，AHP-Topsis，一元线性回归, 多元线性回归
 
 线性规划（实验中）
 

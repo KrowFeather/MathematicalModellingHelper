@@ -8,6 +8,7 @@ from plotly.offline import offline
 
 class Figure:
     def __init__(self):
+
         self.fig = go.Figure()
 
     def add(self, tar):

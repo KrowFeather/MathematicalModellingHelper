@@ -31,14 +31,12 @@ def lossFunction(X, y, w, b):
     return cost
 
 
-def gradientDescent(X, y):
-    iter = 100
+def gradientDescent(X, y, iter, alpha):
     w = 0.1
     b = 1
-    eta = 0.000002
+    eta = alpha
     loss_history = []
     for i in range(iter):
-        print(i)
         loss_history.append(lossFunction(X, y, w, b))
         loss = w * X + b - y
         derivative_w = X.T.dot(loss) / len(X)
