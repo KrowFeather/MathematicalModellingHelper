@@ -16,11 +16,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWebEngineWidgets import QWebEngineView
-from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGroupBox,
-    QHBoxLayout, QHeaderView, QLabel, QLineEdit,
-    QPushButton, QRadioButton, QScrollArea, QSizePolicy,
-    QSpacerItem, QTabWidget, QTableWidget, QTableWidgetItem,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QDockWidget, QFrame,
+    QGroupBox, QHBoxLayout, QHeaderView, QLabel,
+    QLineEdit, QPushButton, QRadioButton, QScrollArea,
+    QSizePolicy, QSpacerItem, QTabWidget, QTableWidget,
+    QTableWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -141,13 +141,40 @@ class Ui_Form(object):
 
         self.graphicviewWidget = QWidget(self.widget_5)
         self.graphicviewWidget.setObjectName(u"graphicviewWidget")
-        self.horizontalLayout_21 = QHBoxLayout(self.graphicviewWidget)
-        self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
-        self.webEngineView = QWebEngineView(self.graphicviewWidget)
+        self.graphicviewWidget.setMinimumSize(QSize(300, 0))
+        self.verticalLayout_17 = QVBoxLayout(self.graphicviewWidget)
+        self.verticalLayout_17.setObjectName(u"verticalLayout_17")
+        self.dockWidget_2 = QDockWidget(self.graphicviewWidget)
+        self.dockWidget_2.setObjectName(u"dockWidget_2")
+        self.dockWidgetContents_2 = QWidget()
+        self.dockWidgetContents_2.setObjectName(u"dockWidgetContents_2")
+        self.horizontalLayout_25 = QHBoxLayout(self.dockWidgetContents_2)
+        self.horizontalLayout_25.setObjectName(u"horizontalLayout_25")
+        self.webEngineView = QWebEngineView(self.dockWidgetContents_2)
         self.webEngineView.setObjectName(u"webEngineView")
         self.webEngineView.setUrl(QUrl(u"about:blank"))
 
-        self.horizontalLayout_21.addWidget(self.webEngineView)
+        self.horizontalLayout_25.addWidget(self.webEngineView)
+
+        self.dockWidget_2.setWidget(self.dockWidgetContents_2)
+
+        self.verticalLayout_17.addWidget(self.dockWidget_2)
+
+        self.dockWidget = QDockWidget(self.graphicviewWidget)
+        self.dockWidget.setObjectName(u"dockWidget")
+        self.dockWidgetContents = QWidget()
+        self.dockWidgetContents.setObjectName(u"dockWidgetContents")
+        self.horizontalLayout_26 = QHBoxLayout(self.dockWidgetContents)
+        self.horizontalLayout_26.setObjectName(u"horizontalLayout_26")
+        self.webEngineView_2 = QWebEngineView(self.dockWidgetContents)
+        self.webEngineView_2.setObjectName(u"webEngineView_2")
+        self.webEngineView_2.setUrl(QUrl(u"about:blank"))
+
+        self.horizontalLayout_26.addWidget(self.webEngineView_2)
+
+        self.dockWidget.setWidget(self.dockWidgetContents)
+
+        self.verticalLayout_17.addWidget(self.dockWidget)
 
 
         self.horizontalLayout_6.addWidget(self.graphicviewWidget)
@@ -169,7 +196,7 @@ class Ui_Form(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 459, 469))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 250, 469))
         self.verticalLayout_10 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
         self.widget_9 = QWidget(self.scrollAreaWidgetContents)
@@ -610,8 +637,8 @@ class Ui_Form(object):
         self.tab_6.setObjectName(u"tab_6")
         self.horizontalLayout_22 = QHBoxLayout(self.tab_6)
         self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
-        self.tabWidget_5 = QTabWidget(self.tab_6)
-        self.tabWidget_5.setObjectName(u"tabWidget_5")
+        self.regressionTabs = QTabWidget(self.tab_6)
+        self.regressionTabs.setObjectName(u"regressionTabs")
         self.tab_11 = QWidget()
         self.tab_11.setObjectName(u"tab_11")
         self.horizontalLayout_24 = QHBoxLayout(self.tab_11)
@@ -625,6 +652,7 @@ class Ui_Form(object):
         self.verticalLayout_16.addItem(self.verticalSpacer_5)
 
         self.SVLRcb = QComboBox(self.widget_22)
+        self.SVLRcb.addItem("")
         self.SVLRcb.addItem("")
         self.SVLRcb.addItem("")
         self.SVLRcb.setObjectName(u"SVLRcb")
@@ -643,12 +671,72 @@ class Ui_Form(object):
 
         self.horizontalLayout_24.addWidget(self.widget_22)
 
-        self.tabWidget_5.addTab(self.tab_11, "")
+        self.regressionTabs.addTab(self.tab_11, "")
         self.tab_12 = QWidget()
         self.tab_12.setObjectName(u"tab_12")
-        self.tabWidget_5.addTab(self.tab_12, "")
+        self.verticalLayout_20 = QVBoxLayout(self.tab_12)
+        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
+        self.widget_25 = QWidget(self.tab_12)
+        self.widget_25.setObjectName(u"widget_25")
+        self.verticalLayout_18 = QVBoxLayout(self.widget_25)
+        self.verticalLayout_18.setObjectName(u"verticalLayout_18")
+        self.widget_23 = QWidget(self.widget_25)
+        self.widget_23.setObjectName(u"widget_23")
+        self.horizontalLayout_21 = QHBoxLayout(self.widget_23)
+        self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
+        self.label_16 = QLabel(self.widget_23)
+        self.label_16.setObjectName(u"label_16")
 
-        self.horizontalLayout_22.addWidget(self.tabWidget_5)
+        self.horizontalLayout_21.addWidget(self.label_16)
+
+        self.btnMVLRTrain = QPushButton(self.widget_23)
+        self.btnMVLRTrain.setObjectName(u"btnMVLRTrain")
+
+        self.horizontalLayout_21.addWidget(self.btnMVLRTrain)
+
+
+        self.verticalLayout_18.addWidget(self.widget_23)
+
+        self.MVLRtrainmat = QTableWidget(self.widget_25)
+        self.MVLRtrainmat.setObjectName(u"MVLRtrainmat")
+
+        self.verticalLayout_18.addWidget(self.MVLRtrainmat)
+
+
+        self.verticalLayout_20.addWidget(self.widget_25)
+
+        self.widget_26 = QWidget(self.tab_12)
+        self.widget_26.setObjectName(u"widget_26")
+        self.verticalLayout_19 = QVBoxLayout(self.widget_26)
+        self.verticalLayout_19.setObjectName(u"verticalLayout_19")
+        self.widget_24 = QWidget(self.widget_26)
+        self.widget_24.setObjectName(u"widget_24")
+        self.horizontalLayout_23 = QHBoxLayout(self.widget_24)
+        self.horizontalLayout_23.setObjectName(u"horizontalLayout_23")
+        self.label_18 = QLabel(self.widget_24)
+        self.label_18.setObjectName(u"label_18")
+
+        self.horizontalLayout_23.addWidget(self.label_18)
+
+        self.btnMVLRPred = QPushButton(self.widget_24)
+        self.btnMVLRPred.setObjectName(u"btnMVLRPred")
+
+        self.horizontalLayout_23.addWidget(self.btnMVLRPred)
+
+
+        self.verticalLayout_19.addWidget(self.widget_24)
+
+        self.MVLRPredictResultTable = QTableWidget(self.widget_26)
+        self.MVLRPredictResultTable.setObjectName(u"MVLRPredictResultTable")
+
+        self.verticalLayout_19.addWidget(self.MVLRPredictResultTable)
+
+
+        self.verticalLayout_20.addWidget(self.widget_26)
+
+        self.regressionTabs.addTab(self.tab_12, "")
+
+        self.horizontalLayout_22.addWidget(self.regressionTabs)
 
         self.tabWidget.addTab(self.tab_6, "")
 
@@ -660,11 +748,11 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.tabWidget.setCurrentIndex(0)
-        self.tabWidget_3.setCurrentIndex(0)
-        self.tabWidget_2.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(3)
+        self.tabWidget_3.setCurrentIndex(1)
+        self.tabWidget_2.setCurrentIndex(2)
         self.tabWidget_4.setCurrentIndex(0)
-        self.tabWidget_5.setCurrentIndex(0)
+        self.regressionTabs.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -739,12 +827,17 @@ class Ui_Form(object):
         self.lpvaLabel.setText("")
         self.tabWidget_4.setTabText(self.tabWidget_4.indexOf(self.tab_10), QCoreApplication.translate("Form", u"\u7ebf\u6027\u89c4\u5212", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_9), QCoreApplication.translate("Form", u"\u8fd0\u7b79\u4f18\u5316", None))
-        self.SVLRcb.setItemText(0, QCoreApplication.translate("Form", u"\u6700\u5c0f\u4e8c\u4e58\u6cd5\uff08\u7c97\u7565\u89e3\uff09", None))
-        self.SVLRcb.setItemText(1, QCoreApplication.translate("Form", u"SKlearn GD", None))
+        self.SVLRcb.setItemText(0, QCoreApplication.translate("Form", u"\u6700\u5c0f\u4e8c\u4e58\u6cd5\uff08\u95ed\u5f0f\u89e3\uff09", None))
+        self.SVLRcb.setItemText(1, QCoreApplication.translate("Form", u"SKlearn OLS", None))
+        self.SVLRcb.setItemText(2, QCoreApplication.translate("Form", u"GD\uff08\u5c40\u90e8\u6700\u4f18\uff09", None))
 
         self.btnStartSVLR.setText(QCoreApplication.translate("Form", u"start", None))
-        self.tabWidget_5.setTabText(self.tabWidget_5.indexOf(self.tab_11), QCoreApplication.translate("Form", u"\u4e00\u5143\u7ebf\u6027\u56de\u5f52", None))
-        self.tabWidget_5.setTabText(self.tabWidget_5.indexOf(self.tab_12), QCoreApplication.translate("Form", u"Tab 2", None))
+        self.regressionTabs.setTabText(self.regressionTabs.indexOf(self.tab_11), QCoreApplication.translate("Form", u"\u4e00\u5143\u7ebf\u6027\u56de\u5f52", None))
+        self.label_16.setText(QCoreApplication.translate("Form", u"\u8bad\u7ec3", None))
+        self.btnMVLRTrain.setText(QCoreApplication.translate("Form", u"Train", None))
+        self.label_18.setText(QCoreApplication.translate("Form", u"\u9884\u6d4b", None))
+        self.btnMVLRPred.setText(QCoreApplication.translate("Form", u"Predict", None))
+        self.regressionTabs.setTabText(self.regressionTabs.indexOf(self.tab_12), QCoreApplication.translate("Form", u"\u591a\u5143\u7ebf\u6027\u56de\u5f52", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6), QCoreApplication.translate("Form", u"\u56de\u5f52\u5206\u6790", None))
     # retranslateUi
 

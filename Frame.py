@@ -1,7 +1,7 @@
 import os
 import sys
 
-import numpy as np
+import pandas as pd
 from PySide6.QtCore import QUrl
 from PySide6.QtWidgets import QWidget, QApplication, QFileDialog, QTableWidgetItem, QHeaderView
 from qt_material import apply_stylesheet
@@ -11,12 +11,12 @@ from Functions.EvaluateModels.EntropyWeight import entropyWeight
 from Functions.EvaluateModels.Topsis import topsis
 from Functions.OperationsOptimization.LinearProgramming import linearProgramming
 from Functions.Preworks.Normalization import normalization
+from Functions.Preworks.PositiveTransformation import *
+from Functions.Regression.MultiVarLinearRegression import gradientDescent
 from Functions.Regression.SingleVarLinearRegression import singleVarLinearRegressionOLS, singleVarLinearRegressionSKL
 from Functions.utils.DrawPlot import Figure
 from Functions.utils.OutputXlsx import outputXlsx
 from MMH import Ui_Form
-import pandas as pd
-from Functions.Preworks.PositiveTransformation import *
 
 
 class Frame(QWidget, Ui_Form):
@@ -51,6 +51,8 @@ class Frame(QWidget, Ui_Form):
         self.lpResMat.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.ahpMat.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.AHPweightMatTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.MVLRPredictResultTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.MVLRtrainmat.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.lptype_min.setChecked(True)
         self.bind()
 
@@ -76,6 +78,8 @@ class Frame(QWidget, Ui_Form):
         self.btnStartAHP.clicked.connect(lambda: self.startAHP())
         self.tabWidget.currentChanged.connect(self.onCurrentTabChanged)
         self.btnStartSVLR.clicked.connect(lambda: self.startSVLR())
+        self.btnMVLRTrain.clicked.connect(lambda: self.startMVLRTrain())
+        self.btnMVLRPred.clicked.connect(lambda: self.startMVLRPred())
 
     def open_file_dialog(self):
         file_name, _ = QFileDialog.getOpenFileName(
@@ -304,16 +308,32 @@ class Frame(QWidget, Ui_Form):
         b = 0
         if SVLRtype == 0:
             w, b = singleVarLinearRegressionOLS(x, y)
-        else:
+        elif SVLRtype == 1:
             w, b = singleVarLinearRegressionSKL(x, y)
             w = w[0]
-        print(w, b)
+        else:
+            w, b, loss = gradientDescent(x, y)
+            fig1 = Figure()
+            fig1.draw2DScatterPlot(range(1, len(loss) + 1), loss, 1)
+            fig1.save('SVLRLossFunc.html')
+            self.webEngineView_2.load(
+                QUrl.fromLocalFile(os.path.abspath(f'SVLRLossFunc.html')))
         fig = Figure()
-        fig.draw2DScatterPlot(x, y)
+        fig.draw2DScatterPlot(x, y, 0)
         fig.drawLinearFunction(w, b, [np.min(x) - 2, np.max(x) + 2])
         fig.save('SVLRgraph.html')
         self.webEngineView.load(
             QUrl.fromLocalFile(os.path.abspath(f'SVLRgraph.html')))
+
+    def startMVLRTrain(self):
+        y = self.mat[:, self.mat.shape[1] - 1]
+        print(y)
+        x = self.mat[:, ]
+        y = self.mat[:, 2]
+
+    def startMVLRPred(self):
+
+        pass
 
 
 def run():
