@@ -18,7 +18,7 @@ class Figure:
     def drawLinearFunction(self, k, b, dom):
         x = np.linspace(dom[0], dom[1], 100)
         y = k * x + b
-        line = go.Scatter(x=x, y=y)
+        line = go.Scatter(x=x, y=y,name=f'{round(k,4)}x+{round(b,4)}')
         self.add(line)
 
     def show(self):

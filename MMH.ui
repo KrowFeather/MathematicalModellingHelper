@@ -827,13 +827,53 @@
              <layout class="QHBoxLayout" name="horizontalLayout_24">
               <item>
                <widget class="QWidget" name="widget_22" native="true">
-                <layout class="QHBoxLayout" name="horizontalLayout_23">
+                <layout class="QVBoxLayout" name="verticalLayout_16">
+                 <item>
+                  <spacer name="verticalSpacer_5">
+                   <property name="orientation">
+                    <enum>Qt::Orientation::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="SVLRcb">
+                   <item>
+                    <property name="text">
+                     <string>最小二乘法（粗略解）</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>SKlearn GD</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
                  <item>
                   <widget class="QPushButton" name="btnStartSVLR">
                    <property name="text">
                     <string>start</string>
                    </property>
                   </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_6">
+                   <property name="orientation">
+                    <enum>Qt::Orientation::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
                  </item>
                 </layout>
                </widget>

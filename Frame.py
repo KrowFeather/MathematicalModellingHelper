@@ -11,7 +11,7 @@ from Functions.EvaluateModels.EntropyWeight import entropyWeight
 from Functions.EvaluateModels.Topsis import topsis
 from Functions.OperationsOptimization.LinearProgramming import linearProgramming
 from Functions.Preworks.Normalization import normalization
-from Functions.Regression.LinearRegression import singleVarLinearRegression
+from Functions.Regression.SingleVarLinearRegression import singleVarLinearRegressionOLS, singleVarLinearRegressionSKL
 from Functions.utils.DrawPlot import Figure
 from Functions.utils.OutputXlsx import outputXlsx
 from MMH import Ui_Form
@@ -297,12 +297,20 @@ class Frame(QWidget, Ui_Form):
         pass
 
     def startSVLR(self):
-        w, b = singleVarLinearRegression(self.mat)
         x = self.mat[:, 1]
         y = self.mat[:, 2]
+        SVLRtype = self.SVLRcb.currentIndex()
+        w = 0
+        b = 0
+        if SVLRtype == 0:
+            w, b = singleVarLinearRegressionOLS(x, y)
+        else:
+            w, b = singleVarLinearRegressionSKL(x, y)
+            w = w[0]
+        print(w, b)
         fig = Figure()
         fig.draw2DScatterPlot(x, y)
-        fig.drawLinearFunction(w, b, [np.min(x)-2, np.max(x)+2])
+        fig.drawLinearFunction(w, b, [np.min(x) - 2, np.max(x) + 2])
         fig.save('SVLRgraph.html')
         self.webEngineView.load(
             QUrl.fromLocalFile(os.path.abspath(f'SVLRgraph.html')))

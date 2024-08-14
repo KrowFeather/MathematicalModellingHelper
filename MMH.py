@@ -618,12 +618,27 @@ class Ui_Form(object):
         self.horizontalLayout_24.setObjectName(u"horizontalLayout_24")
         self.widget_22 = QWidget(self.tab_11)
         self.widget_22.setObjectName(u"widget_22")
-        self.horizontalLayout_23 = QHBoxLayout(self.widget_22)
-        self.horizontalLayout_23.setObjectName(u"horizontalLayout_23")
+        self.verticalLayout_16 = QVBoxLayout(self.widget_22)
+        self.verticalLayout_16.setObjectName(u"verticalLayout_16")
+        self.verticalSpacer_5 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_16.addItem(self.verticalSpacer_5)
+
+        self.SVLRcb = QComboBox(self.widget_22)
+        self.SVLRcb.addItem("")
+        self.SVLRcb.addItem("")
+        self.SVLRcb.setObjectName(u"SVLRcb")
+
+        self.verticalLayout_16.addWidget(self.SVLRcb)
+
         self.btnStartSVLR = QPushButton(self.widget_22)
         self.btnStartSVLR.setObjectName(u"btnStartSVLR")
 
-        self.horizontalLayout_23.addWidget(self.btnStartSVLR)
+        self.verticalLayout_16.addWidget(self.btnStartSVLR)
+
+        self.verticalSpacer_6 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_16.addItem(self.verticalSpacer_6)
 
 
         self.horizontalLayout_24.addWidget(self.widget_22)
@@ -724,6 +739,9 @@ class Ui_Form(object):
         self.lpvaLabel.setText("")
         self.tabWidget_4.setTabText(self.tabWidget_4.indexOf(self.tab_10), QCoreApplication.translate("Form", u"\u7ebf\u6027\u89c4\u5212", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_9), QCoreApplication.translate("Form", u"\u8fd0\u7b79\u4f18\u5316", None))
+        self.SVLRcb.setItemText(0, QCoreApplication.translate("Form", u"\u6700\u5c0f\u4e8c\u4e58\u6cd5\uff08\u7c97\u7565\u89e3\uff09", None))
+        self.SVLRcb.setItemText(1, QCoreApplication.translate("Form", u"SKlearn GD", None))
+
         self.btnStartSVLR.setText(QCoreApplication.translate("Form", u"start", None))
         self.tabWidget_5.setTabText(self.tabWidget_5.indexOf(self.tab_11), QCoreApplication.translate("Form", u"\u4e00\u5143\u7ebf\u6027\u56de\u5f52", None))
         self.tabWidget_5.setTabText(self.tabWidget_5.indexOf(self.tab_12), QCoreApplication.translate("Form", u"Tab 2", None))
